@@ -1,0 +1,525 @@
+\documentclass{article}
+\usepackage{graphicx} % Required for inserting images
+\usepackage[utf8]{inputenc}
+\usepackage{dsfont}
+\usepackage{amssymb}
+\usepackage{tipa}
+\usepackage{braket}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{mathtools}
+\usepackage{textcomp}
+\usepackage{gensymb}
+\usepackage{mathrsfs}
+\usepackage{parskip}
+\usepackage{upgreek}
+\usepackage{physics}
+\usepackage{graphicx}
+\usepackage{enumitem}
+\usepackage{esvect}
+\usepackage[T1]{fontenc}
+\usepackage{amsthm}
+\usepackage{hyperref}
+\usepackage{cite}
+\usepackage{stmaryrd}
+\usepackage[margin=1in]{geometry}
+\usepackage[dvipsnames]{xcolor}
+
+\title{
+    \Huge \textbf{Conformal Symmetry} \\[1.2em]
+
+    \Large Submitted as a Final Paper for \\[0.3em]
+    \large Symmetry and Geometry in Physics \\[1em]
+
+    \normalsize
+    Professor V.P. Nair \\
+    Phys 85200.05 [55298] \\[0.5em]
+
+    \large The Graduate Center
+}
+
+\author{
+    \large Charles Wade
+}
+
+\date{
+    \large May 2026
+}
+
+\begin{document}
+
+
+
+
+
+\maketitle
+\newpage
+
+\section{Motivation}
+Symmetry may be the most defining principle in the study of physics. When first learning about symmetry, it is common to look at a butterfly. The task is to draw a line somewhere on the butterfly, such that it was "the same" on both sides. An appropriately chosen vertical line, centered on the abdomen, showed a symmetry in reflection through the y axis. The butterfly was \textit{invariant} , meaning that it went about some change (reflection) and remained the same as before. This observation remains one of the deepest truths of our universe. Nature is fond of symmetry. Using this as a guiding principle, physicists have spent centuries using the formal study of symmetry to find more and more butterflies manifest in the natural world. Some of these butterflies include the symmetry of physics due to the time and location they occur. An experiment here and now will give the same results as one there and later. A consequence of this\footnote{Due to Noether's Theoem, which connects a continuous symmetry to a conserved quantity.} is the conservation of energy. This is a symmetry of spacetime translations. Symmetry under rotations, in the same way, leads to the conservation of angular momentum. Other examples include the standard model of particle physics. In the formal study of symmetry, \textit{Group Theory}, the symmetries form groups, and the standard model of particle physics is organized as a direct product of the groups: $SU(3) \times SU(2)\times U(1)$. The interactions of particles, organizing our knowledge of the electroweak and strong forces, can be mathematically expresses as a direct product of symmetry groups. 
+\\\\
+Essentially, in the effort to understand the world, it is symmetry that organizes the physical laws. This motivation now brings us to our study of Conformal Symmetry. Conformal Symmetry is a specific type of symmetry that preserves angles. The distances between objects can change, the lengths of objects in the space, this changes areas of volumes depending on the space, but the angular structure is preserved. The most familiar example of a \textit{Conformal Map}, a function that maps from a space $M$ to $N$ and preserves angles, is the Mercator Projection. This maps points on the globe, a sphere, to a two-dimensional flat plane $\mathds{R}^2$. It is easy to see that this map preserves angles, while it distorts distances and areas, specifically near the poles.\footnote{See Greenland.} \\\\
+Let us now turn to a more formal definition and study of Conformal Group and its symmetries. These are used across many areas of physics; Describing a physical system at a critical point of a second order phase transition, string theory, and gravity all employ conformal symmetry in one way or another. The structure of this paper follows that of \cite{ginsparg1988} guiding the physics and \cite{schottenloher2008} guiding the mathematics. Additionally the encyclopedic yellow book \cite{difrancesco1997} and applications found in \cite{polchinski1998}. Much of the material and learning came from the  lectures by Tobias Osborne \cite{osbornelectures}. Additional ideas and concepts come from \cite{nakayama2014} and \cite{Schellekens:1996tg}. \\\\
+We go on to formally introduce the conformal group, noting its structure is drastically different depending on the dimension. We show the overdetermined system for when $d>2$, and classify the generators, algebra, and structure. Then ing $d = 2$, we find a beautiful relation to complex analysis. This leads to two interesting algebras, the Witt and its unique extension the Virasoro algebra. Finally, we look at free electrodynamics. We derive a general condition for a theory to be conformally invariant and show free electrodynamics to have conformal symmetry. Additionally, how this can be used to constrain systems through the Ward-Takahashi identities. We finally conclude with remarks about the continued study of conformal symmetry. A guiding principle of the paper comes from Feynman. The subjects covered are smaller, in an effort to understand each one deeply. If there was more than one way to obtain a result, an attempt to at least sketch out both ways was made. I believe this gives greater insight into the following topics, even if it misses Feynman's quota\footnote{You do not understand something unless you can explain it three different ways.}. Attempts were made nonetheless.  
+
+
+
+\section{An introduction to the Conformal Group}
+Now, let us formalize our study. We start in flat space, and promote to a general manifold after, so consider a manifold $\mathds{R}^{p,q}$ where our dimension is $d = p+q$ and out flat metric is $\eta_{\mu\nu} = (+1,+1,...,+1,-1,-1,...,-1)$ with $p = $ the number of $+1$'s in the metric and $q$ the number of $-1$'s, and $p,q \in \mathds{Z}^+\cup \{0\}$. This argument can also apply to a curved manifold, but for simplicity now, we restrict to the flat case of $d$-dimension. This defines all flat (Psuedo)Riemannian manifolds. 
+
+A \textbf{diffeomorphism} is any smooth, invertible map between manifolds, $\phi : M \longmapsto N$ where $\phi^{-1}$ is also smooth. 
+
+A \textbf{Conformal Transformation} is a diffeomorphism with the requirement that the metric changes only up to a scale factor: 
+\begin{equation}
+    \phi^*g = \Omega^2(x)g
+\end{equation}
+Choosing a local chart on the manifold, we define the coordinates $x = (x^1,...,x^{p+q})$. Let $x\longrightarrow x'(x)$. Our metric is a (0,2) tensor, with the transformation law: 
+\begin{equation}
+    g_{\mu\nu} \longrightarrow g'_{\mu\nu}(x') = \frac{\partial x^\alpha}{\partial x'^\mu}\frac{\partial x^\beta}{\partial x'^\nu}g_{\alpha\beta}(x)
+\end{equation}
+If the diffeomorphism obeys the following relation, then it is a conformal transformation: 
+\begin{equation}
+    g'_{\mu\nu} = \Omega^2(x)g_{\mu\nu} \qquad \Omega^2 > 0 
+\end{equation}
+The requirement the scale factor is strictly greater than zero is to avoid a singularity. From here we can already see the defining feature of conformal transformations. They preserves angles. Suppose I have two vectors defined on the manifold, $x^\mu$ and $y^\nu$ the angle between them is given as:
+\begin{equation}
+    \angle\theta_{xy} = \frac{g_{\mu\nu }x^\mu y^\nu}{\sqrt{(g_{\mu\nu}x^\mu y^\nu)^2}}
+\end{equation}
+If the metrics are proportional up to some scale factor, then $\angle\theta$ is invariant. An immediate result is that a conformal transformation preserves light-cone structure and thus causal relations. This is important in Conformal Field Theory, as this turns out to be the largest group compatible with causality and locality for $d>2$.
+\subsection{The Conformal Group}
+Let us more formally define our group. let (M,g) be a (pseudo)Riemannian manifold, we define the group $\text{Conf}(M)$ as the set of all diffeomorphisms that leave the metric invariant up to a scale factor. We need one more subtle restriction, in that this group defined above is not connected.\footnote{In the same way the Lorentz group is not connected due to parity and time reversal transformations.}. Thus, we restrict to the connected components containing the identity in the group of all conformal diffeomorphisms.
+\begin{equation}
+\begin{aligned}
+\text{Conf}_0(M) &= \{ \phi \in \mathrm{Diff}(M) \mid \phi^*g = \Omega^2(x)\, g \ \text{and connected to the identity} \} \\\\
+\text{Conf}_0(M) &\subset \text{Conf}(M) \subset \mathrm{Diff}(M)
+\end{aligned}
+\end{equation} 
+We can now regard, loosely, and will prove later, the set of conformal transformations as a Lie group and aim to classify its structure. All references to the conformal group going forward are to the connected conformal group.\\\\
+In field theory, symmetries play a central role in constraining the degrees of freedom of a system. Classically, a symmetry corresponds to transformations that leave the action invariant, leading to conserved currents. In quantum field theory, the situation is more subtle. Wigner’s theorem states that physical symmetries are implemented by unitary or anti-unitary operators acting on the Hilbert space, giving a projective unitary representation of the symmetry group. Thus, classifying the structure of the conformal group becomes equivalent to finding all the projective unitary representations of the group, and trying to implement them locally. We focus on the latter. 
+
+
+\subsection{The Conformal Killing Equation}
+Let us consider an infinitesimal conformal transformation: 
+\begin{equation}
+    x^\mu \longrightarrow x'^\mu = x^\mu - \varepsilon^\mu(x)
+\end{equation}
+where $\varepsilon^\mu(x)$ is an infinitesimal vector that can vary with $x$. To be conformal, this transformation must obey the condition that the metric can only change up to a scale factor. Under this transformation the metric changes as a $(0,2)$ tensor, computing we find
+\begin{align}
+\eta'_{\mu\nu}
+&=
+(\delta^\alpha_\mu + \partial_\mu \varepsilon^\alpha)
+(\delta^\beta_\nu + \partial_\nu \varepsilon^\beta)
+\eta_{\alpha\beta}
+\\
+&=
+\eta_{\mu\nu}
++ (\partial_\mu \varepsilon_\nu
++ \partial_\nu \varepsilon_\mu)
++ \mathcal{O}(\varepsilon^2)
+\end{align}
+The conformal condition requires that: 
+\begin{equation}
+    \eta'_{\mu\nu} = \eta_{\mu\nu} + (\partial_\mu \varepsilon_\nu
++ \partial_\nu \varepsilon_\mu) = \Omega^2(x) \eta_{\mu\nu}
+\end{equation}
+This implies the derivative terms must be proportional to the metric,
+\begin{equation}
+    \partial_\mu \varepsilon_\nu
++ \partial_\nu \varepsilon_\mu = (1+\Omega^2)\eta_{\mu\nu}
+\end{equation}
+Tracing both sides then finds the proportionality relation
+\begin{equation}
+     (1+\Omega^2) = \frac{2}{d} (\partial\cdot\varepsilon)
+\end{equation}
+We have found a constraint equation on our infinitesimal vector for the transformation to be conformal. It is our \textbf{Conformal Killing Equation} (CKE) for $\mathds{R}^{p,q}$ and we use it to classify and study the structure of the conformal group through its generators and associated algebra: 
+\begin{equation}
+\boxed{
+\partial_\mu \varepsilon_\nu
++ \partial_\nu \varepsilon_\mu
+= \frac{2}{d}(\partial \cdot \varepsilon)\,\eta_{\mu\nu}
+}
+\end{equation}
+\subsubsection{Geometric Approach}
+There exists interesting structure in the Conformal Killing Equation that is more apparent from a geometric derivation. Consider a general curved (Psuedo)Riemannian manifold $(M^{p,q},g)$ again with signature $(+,+,...,-,-,...)$. Our manifold has a defined metric that encodes the information used to calculate distances, length angles, etc. Therefore, symmetries on a manifold must be manifest as symmetries of the metric. These are \textbf{isometries}. Under a diffeomorphism, we want to be able to measure the change in the metric. Consider the same infinitesimal transformation as before. 
+\begin{equation}
+    x^\mu \longrightarrow x'^\mu = x^\mu - \varepsilon^\mu(x)
+\end{equation}
+A measure of how the metric changes on the manifold can be thought of in the following sense. $\varepsilon^\mu$, is a vector field on the manifold generating a flow. The flow changes the tensor field as it drags it along the flow. The \textbf{Lie Derivative} of a tensor with respect to $\varepsilon$ denoted $L_\varepsilon T$ is a measure of how the tensor T changes infinitesimally under this flow. Isometries are characterized by $L_\varepsilon g_{\mu\nu} = 0$. This is the Killing Equation\footnote{Used extensively in General Relativity to find isometries of the spacetime.}. If we relax the assumption to $L_\varepsilon g_{\mu\nu} = \lambda(x)g_{\mu\nu}$ we can now find an equation defining the conditions on $\varepsilon^\mu$ that will change the metric only up to a scale, giving us a Conformal Killing Equation. The Lie derivative of a $(0,2)$ tensor is:
+\begin{equation}
+    L_\varepsilon g_{\mu\nu} = \nabla_\mu \varepsilon_\nu + \nabla_\nu\varepsilon_\mu
+\end{equation}
+and the trace solves $\lambda(x) = \frac{2 }{d}\nabla_\mu\varepsilon^\mu$ and we arrive at the Conformal Killing Equation for our manifold $(M^{p,q} , g)$ as 
+\begin{equation}
+    \boxed{\nabla_\mu \varepsilon_\nu + \nabla_\nu\varepsilon_\mu = \frac{2}{d}(\nabla_\mu\varepsilon^\mu)g_{\mu\nu}}
+\end{equation}
+The purpose of this geometric derivation is to show that the conformal killing equation is not a coordinate-dependent equation, but a geometrical feature of the manifold. It defines a class of solutions to $\varepsilon^\mu$ that preserve angular structure under the flow generated by the vector field, and that our flat CKE can be promoted to curved space with the usual promotion of partials to covariant derivatives. 
+
+
+\section{Classification of the Conformal Group for $\mathbf{d > 2}$}
+Let us restrict to when $d > 2$. To classify the solutions to the CKE we look to the structure of the equation. We input a vector field with the condition that the first derivatives are constrained. If they satisfy the equation, then $\varepsilon^\mu$ is a conformal transformation. An important consistency on the CKE gives us our integrability condition. Let us try to isolate a second derivative term on $\varepsilon$. Starting with the CKE, take another $\partial_\rho$ and then permute the indices. Then compute the sum of the first two permutations and the negation of the last, cancel terms due to the commutativity of partials to get
+\begin{equation}
+\partial_\rho \partial_\mu \varepsilon_\nu
+=
+\frac{1}{d}\Big[
+\eta_{\mu\nu}\,\partial_\rho(\partial\cdot\varepsilon)
++
+\eta_{\rho\nu}\,\partial_\mu(\partial\cdot\varepsilon)
+-
+\eta_{\rho\mu}\,\partial_\nu(\partial\cdot\varepsilon)
+\Big]
+\end{equation}
+and then multiplying by $\eta^{\rho\mu}$ we can obtain a second order equation of $\varepsilon$, as our integrability condition equation
+\begin{equation}
+\boxed{\square\varepsilon_\mu + \frac{d-2}{d}\partial_\mu (\partial\cdot\varepsilon) = 0}
+\end{equation}
+Between the CKE and the integrability equation, we have an overdetermined system. Starting with a general vector field $\varepsilon^\mu(x)$, the conformal Killing equation constrains its first derivatives by fixing the symmetric part of $\partial_\mu \varepsilon_\nu$ in terms of the single scalar function $\partial \cdot \varepsilon$. The second derivative is then constrained by the integrability condition, so all second derivatives of $\varepsilon^\mu$ are determined entirely by derivatives of the scalar function
+\[
+\phi(x)\equiv \partial\cdot\varepsilon
+\]
+Taking another derivative gives a third derivative condition and its trace
+\begin{equation}
+\left[\eta_{\mu\nu}\square + (d-2)\partial_\mu\partial_\nu\right]\phi = 0
+\qquad \quad
+(2d-2)\square\phi = 0
+\end{equation}
+Therefore, $\phi(x)$ is at most linear in the coordinates, which implies that $\varepsilon^\mu(x)$ is at most quadratic in $x$. We conclude that all conformal transformations for $ d> 2$ are generated by vector fields with constant, linear, or quadratic spacetime dependence. We can use this to classify the solutions to $\varepsilon$: 
+\begin{equation}
+\begin{array}{|c|c|c|c|}
+\hline
+\text{Order} & \varepsilon^\mu(x) & \text{Name} & \text{DOF} \\
+\hline
+\text{Constant} & a^\mu & \text{Spacetime Translations } & d \\
+\hline
+\text{Linear} & \omega^\mu{}_{\nu} x^\nu & \text{Lorentz rotations } & \frac{d(d-1)}{2} \\
+\hline
+\text{Linear} & \lambda x^\mu & \text{Dilation } & 1 \\
+\hline
+\text{Quadratic} & b^\mu x^2 - 2(b\cdot x)x^\mu & \text{Special conformal } & d \\
+\hline
+\end{array}
+\end{equation}
+This is the full list of infinitesimal conformal transformations for $d> 2$, and by exponentiation these build the global transformations. 
+\subsection{Generators and Commutations Relations}
+We determine the generators from the infinitesimal action of a conformal transformation on a field
+\begin{equation}
+f(x)\to f(x-\varepsilon(x))
+\end{equation}
+To first order, the variation is
+\begin{equation}
+\delta f(x) = -\varepsilon^\mu(x)\partial_\mu f(x)
+\end{equation}
+so we associate to each conformal Killing vector the differential operator
+\begin{equation}
+G = -i\,\varepsilon^\mu(x)\partial_\mu
+\end{equation}
+with the factor of \(i\) included so the generators are Hermitian, and thus the group representation will be Unitary for a quantum theory. Finite transformations are obtained by exponentiation, \(U=e^{iG}\).
+We then find all generators of the conformal group: 
+\begin{equation}
+\begin{array}{|c|c|c|c|}
+\hline
+\text{Generator} & \text{Differential Operator} & \text{Infinitesimal Form} & \text{Finite Transformation} \\
+\hline
+P_\mu &
+-i\partial_\mu &
+\varepsilon^\mu = a^\mu &
+x^\mu \rightarrow x^\mu + a^\mu \\
+\hline
+M_{\mu\nu} &
+-i(x_\mu\partial_\nu - x_\nu\partial_\mu) &
+\varepsilon^\mu = \omega^\mu{}_\nu x^\nu &
+x^\mu \rightarrow \Lambda^\mu{}_\nu x^\nu \\
+\hline
+D &
+-ix^\mu\partial_\mu &
+\varepsilon^\mu = \lambda x^\mu &
+x^\mu \rightarrow e^\lambda x^\mu \\
+\hline
+K_\mu &
+-i(2x_\mu x^\nu\partial_\nu - x^2\partial_\mu) &
+\varepsilon^\mu = b^\mu x^2 - 2(b\cdot x)x^\mu &
+x^\mu \rightarrow \frac{x^\mu - b^\mu x^2}{1 - 2b\cdot x + b^2 x^2} \\
+\hline
+\end{array}
+\end{equation}
+We see the Poincaré group forms a subgroup of the full conformal group, which is extended by dilations $D$ and special conformal transformations (SCT) $K_\mu$. The dilations add a scale transformation to the Poincare group. The SCT are non-linear, and is generated by an inversion - translation - inversion. \\\\
+We have implicitly assumed that the connected component of the conformal transformations forms a Lie group of smooth diffeomorphisms. More precisely, what is known a priori is that these transformations arise from smooth conformal Killing vector fields, therefore they act as infinitesimal diffeomorphisms on spacetime. We now justify the Lie group structure by studying the associated generators, showing that they are closed under the Lie bracket and form a complete basis for all conformal Killing vectors in $d > 2$, thereby defining the corresponding Lie algebra and hence the connected conformal group.
+
+\textbf{Closure:} \\
+The more direct path is take $\varepsilon^\mu_1$ and $\varepsilon^\mu_2$ to be a solutions to the CKE. The compute their Lie Bracket: $[\varepsilon_1 , \varepsilon_2]^\mu$ and show this is also a solution to the CKE. Another, is to compute all commutators and show each is proportional to another generator. We follow the second method, obtaining
+\begin{equation}
+\begin{aligned}
+[M_{\mu\nu}, M_{\rho\sigma}]
+&= i(\eta_{\mu\rho} M_{\nu\sigma}-\eta_{\mu\sigma} M_{\nu\rho}
+-\eta_{\nu\rho} M_{\mu\sigma}+\eta_{\nu\sigma} M_{\mu\rho}) \\
+[M_{\mu\nu}, P_\rho]
+&= i(\eta_{\mu\rho} P_\nu-\eta_{\nu\rho} P_\mu) \\
+[M_{\mu\nu}, K_\rho]
+&= i(\eta_{\mu\rho} K_\nu-\eta_{\nu\rho} K_\mu) \\
+[D, P_\mu]
+&= iP_\mu \\
+[D, K_\mu] &= -iK_\mu \\
+[K_\mu, P_\nu]
+&= 2i(\eta_{\mu\nu} D - M_{\mu\nu})
+\end{aligned}
+\label{com_rel_c}
+\end{equation}
+and any unstated are zero. We see that any combination of generators gives another generator, and thus our algebra is closed. 
+
+\textbf{Completeness:}\\
+The most general solution of $\varepsilon^\mu$ for $d>2$ was found to be:
+\begin{equation}
+    \varepsilon^\mu = a^\mu + \omega^\mu{}_\nu x^\nu + \lambda x^\mu + b^\mu x^2 - 2(b\cdot x)x^\mu.
+\end{equation}
+This exhausts all independent solutions of the conformal Killing equation in $d > 2$, thus the corresponding generators form a complete basis for the space of conformal Killing vectors.\\\\
+We have shown that the conformal group has a Lie algebra structure. We will take this to be sufficient to define the full Lie group\footnote{More work must be done to fully state that the conformal group is a Lie group.}. What we have shown is a realization of Liouville's Theorem. 
+
+\textbf{Liouville's Theorem:} Every conformal transformation $\phi : U \subset \mathds{R}^{p,q}$ with $p+q >2$, on a connected subset of $U \subset \mathds{R}^{p,q}$ is a composition of a spacetime translation, an orthogonal transformation, a dilation, and a special conformal transformation. 
+
+\subsection{Identifying with SO(d,2)}
+Defining the full Lie Algebra of the connected conformal group, we denote as $\mathfrak{conf}(d)$ for $d>2$. We now look for an isomorphism, and restrict to a Lorentzian signature.  A guiding hint is to count the number of linearly independent generators, which give the dimension of the vector space. For $\mathfrak{conf}(d)$ we count from the chart: $d + \frac{d(d-1)}{2}+1+d = \frac{(d+1)(d+2)}{2}$, which is the same dimensions as the lie group $\mathfrak{so}(d,2)$, as $\text{dim}\left(SO(N)\right) = \frac{N(N-1)}{2}$. Thus, we want to find a bijective map $\phi : \space \mathfrak{so}(d,2) \longmapsto \mathfrak{conf}(d)$.
+
+First, identify the group $SO(d,2)$ as the special psuedo-orthogonal group. It is the set of real, linear transformations $M$ acting on a $d+2$ dimensional vector space, with signatue $(+,+,+,+,...,-,-)$ that obey
+\begin{equation}
+\begin{aligned}
+M^T \eta M &= \eta \\
+[J_{AB}, J_{CD}] &= \eta_{BC}J_{AD}
+- \eta_{AC}J_{BD}
+- \eta_{BD}J_{AC}
++ \eta_{AD}J_{BC}
+\end{aligned}
+\end{equation}
+With $J_{AB}$ being antisymmetric. Our bijective map comes from the following association, noting that Greek indices take values $\{0,...,d-1\}$ and Latin has two extra dimensions, $A = (\mu, 1, 2)$. This gives four generators for $\mathfrak{so}(d,2)$ as $\{J_{\mu\nu},J_{\mu 1}, J_{\mu 2}, J_{12}\}$ and we map with $\phi$ to the conformal Lie algebra. The explicit map is from the realization that Minkowski spacetime as the lightcone in $d + 2$ dimensions. 
+\begin{equation}
+\begin{aligned}
+M_{\mu\nu} &= J_{\mu\nu} \\
+P_\mu &= J_{\mu 1} + J_{\mu 2} \\
+K_\mu &= J_{\mu 1} - J_{\mu 2} \\
+D &= J_{12}
+\end{aligned}
+\end{equation}
+We therefore have a defined candidate isomorphism. To show a full Lie Algebra Isomorphism we require now prove the isomorphism.\\\\
+Let $\phi:\mathfrak{g}\to\mathfrak{h}$ be a map between Lie algebras. Then $\phi$ is a Lie algebra isomorphism if:
+\begin{itemize}
+    \item \textbf{Bijectivity:} $\phi$ is a bijection (one-to-one and onto), so every element of $\mathfrak{h}$ is uniquely obtained from an element of $\mathfrak{g}$.
+
+    \item \textbf{Preserves Lie Bracket:}  $\forall \space \space X,Y \in \mathfrak{g}$,
+    \[
+    \phi([X,Y]_{\mathfrak{g}}) = [\phi(X), \phi(Y)]_{\mathfrak{h}}
+    \]
+\end{itemize}
+$\phi$ is clearly invertible, and using the commutation relation defined in (26), one can show the conformal Lie algebra commutation relations (24) are reproduced. With elation, we have found a Lie Algebra Isomorphism: 
+\begin{equation}
+    \mathfrak{conf}(d) \cong \mathfrak{so}(d,2)
+\end{equation}
+A couple things to note. The Lie algebra is defined infinitesimally around the identity, thus the group isomorphism is only defined locally. We see that the local structure of these groups is equivalent. They have the same generators, dimension, and structure constants. Essentially, these Lie algebras generate the same local, infinitesimal transformations. We see that a conformal transformation is also produced by a rotation in the Lorentz group of 2 higher dimensions. Globally, we can only equate the group structure up to some quotient, as we have only proved a Lie algebra isomorphism. Another interpretation of this isomorphism is the following. The conformal group is the Poincare group extended by dilations and special conformal transformations, which makes it non-linear due to the SCT. We can linearize it locally by embedding our conformally invariant space in a higher-dimensional Lorentz group $SO(d,2)$. This hints at another way to show the isomorphism. The Lorentz transformations in $\mathds{R}^{d,2}$ preserve the light-cone structure, and would project down to conformal transformations in $d$ dimensions. Overall, ignoring a global quotient we have that the conformal group for $d>2$ is isomorphic to the Lorentz group in 2 higher dimensions. 
+\begin{equation}
+    \text{Conf}(d) \thicksim SO(d,2)
+\end{equation}
+
+\section{Dimension 2 is Special}
+A large reason why studying the conformal group leads to rich structure is how different it is depending on what dimension you are in. From the CKE and integrability condition it is clear that $ d = 2$ is special. Let $g_{\mu\nu} = \delta_{\mu\nu}$, the CKE becomes: 
+\begin{equation}
+    \partial_1\varepsilon_2 = -\partial_2\varepsilon_1 \quad\text{and} \quad  \partial_1\varepsilon_1 = \partial_2\varepsilon_2
+\end{equation}
+These are the Cauchy-Riemann equations. They are the conditions for a complex function to be analytic. Let us change to complex coordinates, starting from our two-component vector field $\varepsilon^\mu = (\varepsilon^1,\varepsilon^2)$ to $\varepsilon(z) = \varepsilon^1 + i\varepsilon^2$ and $\Bar{\varepsilon}(\Bar{z}) = \varepsilon^1 - i\varepsilon^2$. Notice we have already imposed the Cauchy-Riemann equations (our conformal condition) in that $\partial_{\Bar{\varepsilon}}\varepsilon=0$ defining our holomorphic functions and $\partial_{\varepsilon}\bar{\varepsilon}=0$ defining our anti-holomorphic functions.
+
+The conformal condition in $2$ dimensions is satisfied by any infinitesimal analytic function. This statement is a drastic difference to when $d>2$. The constraints imposed that conformal transformations were at most a quadratic function, which led to a finite-dimensional Lie algebra. We will soon see that in $d = 2$ we get an infinite-dimensional Lie algebra due to this freedom of solutions for $\varepsilon$.
+
+Now we study infinitesimal conformal transformations. Not all solutions for $\varepsilon$ exponentiate to globally well-defined transformations, since generic holomorphic functions can have singularities and need not be invertible on the full complex plane. Therefore the global transformations are actually a bit restrictive. $\varepsilon$ can be a linear (anti)holomoprphic function that is entire and has an inverse. These are given as
+\begin{equation}
+    f(z) = \frac{\alpha z + \beta}{\gamma z + \delta}
+\end{equation}
+for $\alpha, \beta, \gamma, \delta \in \mathds{C}$ and $\alpha\delta-\beta\gamma \neq 0$. These generate global conformal symmetries in $d = 2$. They are called Mobius or Linear Fractional transformations. We will now turn to the larger symmetry structure defined locally by $\{\varepsilon(z),\bar{\varepsilon}(\bar{z})\}$, where our local transformation may not exponentiate to a defined global conformal transformation. Physically, theories that are locally invariant are subject to much stronger constraints than those with only global symmetry.
+
+\subsection{Local Algebra of Infinitesimal Conformal Transformations}
+Suppose a local conformal transformation in $d = 2$
+\begin{equation}
+    z \longrightarrow f(z) = z + \varepsilon(z) \qquad \bar{z} \longrightarrow f(\bar{z}) = \bar{z} + \bar{\varepsilon}(\bar{z})
+\end{equation}
+and define a local basis from the $\varepsilon$'s Laurent expansion about $z=0$. Therefore 
+\begin{equation}
+\varepsilon(z) = \sum_{n\in\mathbb{Z}} -\varepsilon z^{n+1}
+\end{equation}
+and similarily for the antiholomorphic function. Thus our basis elements of our expansion are $\varepsilon_n = -\varepsilon z^{n+1}$. We can equally interpret this as an exponentiated generator that gave us $z \longrightarrow z+ \varepsilon_n(z)$ which we write as $e^{\varepsilon\ell_n}$. Acting with the exponential and solving for what $\ell_n$ gives the differential operator. These operators are the generators of our infinitesimal conformal transformations. They are infinite dimensional, as $n \in \mathds{Z}$, and are the elements of our Lie algebra, finding
+\begin{equation}
+\ell_n = -z^{n+1}\partial_z
+\qquad \text{and} \qquad
+\bar{\ell}_n = -\bar{z}^{\,n+1}\partial_{\bar{z}}
+\qquad n \in \mathbb{Z}
+\end{equation}
+These generators satisfy two commuting copies of the Witt algebra:
+\begin{equation}
+[\ell_m,\ell_n] = (m-n)\,\ell_{m+n}, 
+\qquad
+[\bar{\ell}_m,\bar{\ell}_n] = (m-n)\,\bar{\ell}_{m+n},
+\qquad
+[\ell_m,\bar{\ell}_n] = 0.
+\end{equation}
+Which is to say, our algebra of local infinitesimal coordinate transformations in $d=2$ is $\mathcal{A} = \mathcal{W} \oplus \bar{\mathcal{W}}$. Therefore, in two dimensions, the local conformal transformations generate an infinite-dimensional algebra of holomorphic and antiholomorphic vector fields. The corresponding infinitesimal generators satisfy the Witt algebra,
+which can be viewed as the classical conformal symmetry algebra in two dimensions.
+\subsection{Virasoro Algebra}
+The Witt Algebra $\mathcal{W}$ encodes the classical symmetry of local conformal transformations in two dimensions. Mathematically, we can ask if there exists a central extension. This is a term we can add to the algebra that is central\footnote{Central meaning that it is proportional to the identity and thus commutes with all operators.} and cannot be absorbed by a redefinition of the operators. This is used in quantizing the theory. A quantum theory with symmetries promotes the generators to operators on the Hilbert space. They can be realized as projective representations of the classical symmetry. In this promotion, the classical algebra needs to be centrally extended to account for purely quantum effects, such as quantum anomalies. It must be consistent with the Jacobi identity, and solving admits the unique extension of the Witt algebra, defining the \textbf{Virasoro algebra}: 
+\begin{equation}
+\boxed{
+\begin{aligned}
+[L_n, L_m] &= (n-m)L_{n+m} + \frac{c}{12}n(n^2-1)\,\delta_{n+m,0}, \\
+[\bar{L}_n, \bar{L}_m] &= (n-m)\bar{L}_{n+m} + \frac{\bar{c}}{12}n(n^2-1)\,\delta_{n+m,0}, \\
+[L_n, \bar{L}_m] &= 0.
+\end{aligned}
+}
+\end{equation}
+where $c \in \mathds{C}$ is the central charge of the theory, and $1/12$ is a normalization. The central charge arises from the quantum ordering or operators in $T(z)$. Another derivation of the Virasoro algebra gives a bit more insight into its properties. It relies on defining the conformal charge\footnote{The conserved charge associated with conformal symmetry of the theory.} of the theory as 
+\begin{equation}
+    Q_\varepsilon = \frac{1}{2\pi i }\oint dz \varepsilon(z)T(z)
+\end{equation}
+where $T(z)$ is the holomorphic stress-energy tensor, and identifying $Q_\varepsilon$ as the generator of conformal transformations. You can express $T(z)$ and $\bar{T}(\bar{z})$ in terms of a Laurent mode expansion again, with the generators as the coefficients. Inverting this relationship gives: 
+\begin{equation}
+\boxed{
+L_n = \oint \frac{dz}{2\pi i}\, z^{n+1} T(z),
+\qquad
+\bar{L}_n = \oint \frac{d\bar z}{2\pi i}\, \bar z^{\,n+1} \bar T(\bar z)
+}
+\end{equation}
+Using the operator product expansion\footnote{See \cite{difrancesco1997}} and writing commutators in terms of contour integrals, one obtains the same algebra as (36). Thus the Virasoro algebra is deeply connected to the modes of the stress-energy tensor. The generators $\{L_n,\bar{L}_n\}$ can be made in to the physical observables of the theory. They are the conserved charges associated with conformal symmetry, and can be used to classify the spectrum of states. Additionally, the spectrum of a given theory must organize itself into irreducible representations of the algebra. With some subtlety, $L_0$ and $\bar{L}_0$ can be related to the Hamiltonian of the theory. The central charge $c$ is a pure quantum realization, it has no classical analog. Different values of $c$ define inequivalent quantum theories with common models such as the free boson $c=1$ or the Ising model at a critical point $c = \frac{1}{2}$. \\\\
+Going from $d > 2$ to $ d = 2$, we went from an overdetermined system to an underdetermined one. Consequently, the Lie algebra for $d > 2$ was finite-dimensional, whereas $ d = 2$ it is infinite-dimensional. Physically, a two-dimensional conformal field theory is thus highly constrained by the infinite dimensional Lie algebra $\mathcal{V}\oplus\bar{\mathcal{V}}$. This is the fundamental reason many two-dimensional conformal field theories become exactly solvable, and no perturbative methods are required. It also underlies the AdS/CFT correspondence. General relativity in the bulk is diffeomorphism invariant, a coordinate change does not change the physics. At the boundary, the diffeomorphisms become true symmetries of the theory. In $AdS_3$ it turns out that these nontrivial boundary symmetries are two copies of the Virasoro algebra. This gives the correspondence to a two-dimensional CFT. Therefore, gravitational dynamics in the bulk can be related to the operator structure on the boundary, with the link being the conformal symmetry realized through the Virasoro algebra. 
+
+\section{Conformal Invariance}
+Let us turn to the theory of free Electrodynamics. For now, we will not specify any dimension other than $d>2$ and a generic manifold that may be curved. The defining action of our theory is 
+\begin{equation}
+    S = \int d^dx\sqrt{-g}\left[-\frac{1}{4} F_{\mu\nu}F^{\mu\nu}\right]
+\end{equation}
+where $\sqrt{-g}$ is the determinant of the metric in a Lorentzian signature. This defines a $U(1)$ free Maxwell theory. Now, let us naively go forward in an attempt to discern whether our theory is conformally invariant. We want the action to be invariant under our conformal transformations. Maxwell's theory in this form is constructed to be Poincare invariant, which accounts for translations and Lorentz rotations, so we could focus on dilation and special conformal transformations. Naively, we can compute how the vector and tensor fields change with a dilation and SCT, and see what requirements we get for the theory to be invariant. We will follow another way using Noether's Theorem and the stress-energy tensor. Let us have any action $S$, dependent on fields and their derivatives, and vary with an infinitesimal conformal transformation. This amounts to the variation of the action with respect to the metric
+\begin{equation}
+    \delta S = \int d^dx\frac{\delta S}{\delta g_{\mu\nu}}\delta g _{\mu\nu} 
+\end{equation}
+The stress-energy tensor is a measure of how the fields respond to a transformation of the spacetime. It is defined as
+\begin{equation}
+    T_{\mu\nu} \equiv \frac{2}{\sqrt{-g}}\frac{\delta S}{\delta g^{\mu\nu}}
+\end{equation}
+Our variation then becomes
+\begin{equation}
+    \delta S = \frac{1}{2}\int d^dx \sqrt{-g}\space T^{\mu\nu}\delta g_{\mu\nu} 
+\end{equation}
+When we made our infinitesimal conformal transformation $x \longrightarrow x + \varepsilon$, we found the variation of the metric is given by
+\begin{equation}
+    \delta g_{\mu\nu} = \nabla_\mu \varepsilon_\nu + \nabla_\nu\varepsilon_\mu = \frac{2}{d}\left(\nabla_\rho\varepsilon^\rho\right) g _{\mu\nu}
+\end{equation}
+The variation of the action under a local conformal transformation then
+\begin{equation}
+    \delta S = \frac{1}{d}\int d^dx \sqrt{-g}\space T^\mu{}_\mu\left(\nabla_\nu\varepsilon^\nu\right)
+\end{equation}
+We observe that the variation of the action is given in terms of the trace of the stress-energy tensor $T^\mu{}_\mu$ and the divergence of our conformal transformation $\nabla_\mu\varepsilon^\mu$. If either is zero, the action is unchanged and our theory has conformal symmetry. We now distinguish two cases.\\\\
+\textbf{Case 1:} $\nabla \cdot \epsilon = 0$
+\begin{equation}
+\delta S = 0
+\end{equation}
+There is no extra condition here. This class corresponds to translations and Lorentz rotations and boosts, which make up the Poincare Group. These transformations leave volume invariant (no scale or SCT).
+
+\textbf{Case 2:} $\nabla \cdot \epsilon \neq 0$
+
+For the full group of infinitesimal conformal transformations (dilations and special conformal transformations), the divergence of $\varepsilon$ is non-zero. In this case, invariance under these transformations requires
+\begin{equation}
+T^\mu{}_\mu = 0
+\end{equation}
+What we find is that the necessary and sufficient condition for an action to be
+conformally invariant is that the stress-energy tensor is traceless. However, the stress-energy tensor is not unique. It is defined up to the addition of a total derivative,
+\begin{equation}
+T_{\mu\nu} \;\to\; T'_{\mu\nu}
+=
+T_{\mu\nu}
++
+\partial^\rho \Sigma_{\rho\mu\nu}
+\end{equation}
+where $\Sigma$ is anti-symmetric in its first two indices
+\begin{equation}
+\Sigma_{\rho\mu\nu} = - \Sigma_{\mu\rho\nu}
+\end{equation}
+which preserves conservation \(\partial^\mu T'_{\mu\nu} = 0\).
+
+This freedom can be exploited to improve the stress-energy tensor, and in some cases can be made to have a traceless stress-energy tensor, and thus a conformally invariant physical theory. Therefore, the requirement for a theory to be conformally invariant is that the stress tensor can be \textit{made} to be traceless. A term that is added for this requirement is an \textit{improvement term} to the stress tensor. This argument is also classical. Quantum effects can spoil this condition due to quantum anomalies and running couplings. It turns our we need a traceless stress-eneregy tensor and vanishing Beta functions from the renormalization group. 
+
+\subsection{Free Electrodynamics}
+Having built universal machinery to probe if a theory is conformally invariant, we return to free electrodynamics. The action is given as: 
+\begin{equation}
+    S = \int d^dx\sqrt{-g}\left[-\frac{1}{4} g^{\rho\mu}g^{\sigma\nu}F_{\mu\nu}F_{\rho\sigma}\right]
+\end{equation}
+From this we compute the variation of the action as 
+\begin{equation}
+\delta S
+=
+\int d^d x \,\sqrt{-g}
+\left[
+-\frac{1}{2} F_{\mu\rho}F_{\nu}{}^{\rho}
++\frac{1}{8} g_{\mu\nu} F_{\rho\sigma}F^{\rho\sigma}
+\right]\delta g^{\mu\nu}
+\end{equation}
+and using the definition of the stress-energy tensor we pull out the functional derivative and construct the stress energy tensor
+\begin{equation}
+T_{\mu\nu}
+=
+F_{\mu\rho}F_{\nu}{}^{\rho}
+-
+\frac{1}{4}g_{\mu\nu}F_{\rho\sigma}F^{\rho\sigma}
+\end{equation}
+Due to the machinery above, all we have to do is check if $T$ is traceless and we will have shown that the action of our theory in invariant under transformations of the conformal group. Let us trace the above to find
+\begin{equation}
+    T^\mu{}_\mu = \left(1-\frac{d}{4}\right)F^2
+\end{equation}
+We notice that when $d = 4$ the stress-energy tensor for free electrodynamics is traceless. Thus, free electrodynamics in 4 spacetime dimensions is conformally invariant. If $d\neq 4$ then the condition fails, and there does not exist an improvement term, so free electrodynamics conformal symmetry in $d=4$ only. A consequence is that free electrodynamics is a scale invariant theory. 
+
+
+A geometric way to understand why free electrodynamics is conformally invariant in four dimensions is to note that conformal transformations preserve the null structure of spacetime. Under a conformal rescaling, $g_{\mu\nu}\rightarrow \Omega^2(x)g_{\mu\nu}$, null intervals satisfying $ds^2=0$ remain null since $ds'^2=\Omega^2(x)ds^2=0$. Thus, conformal transformations preserve the light cones and causal structure of spacetime, implying that the propagation of massless photons is unaffected by local changes in scale. While this observation suggests a close connection between electromagnetism and conformal symmetry, the preservation of null trajectories alone is not sufficient to establish conformal invariance, since many theories with massless excitations are not conformally invariant. The deeper reason lies in the geometric structure of Maxwell theory itself. The equations of motion can be expressed as $dF=0$ and $d\star F=0$, where $F$ is the electromagnetic field-strength two-form and $\star$ denotes the Hodge dual. Under a Weyl transformation, the Hodge dual acting on a $p$-form acquires a factor of $\Omega^{d-2p}$, so for the Maxwell field strength, which is a two-form, one finds $\star F\rightarrow \Omega^{d-4}\star F$. Consequently, the equation $d\star F=0$ is invariant under conformal rescalings only when $d=4$. In four dimensions, the Hodge dual acting on a two-form is therefore insensitive to the local scale factor, implying that the Maxwell equations depend only on the conformal class of the metric rather than on a particular representative metric. From this perspective, the preservation of light cones provides the geometric intuition for conformal symmetry, while the Weyl invariance of the Hodge dual acting on the electromagnetic field strength explains why free electrodynamics is genuinely conformally invariant only in four spacetime dimensions.
+
+\subsection{The Constraining Power of Conformal Invariance}
+We have shown that free electrodynamics is invariant under transformations generated by $G = \{M_{\mu\nu},P_\mu,D, \\K_\mu\}$. Classically this implies that each generator corresponds to a conserved current, given by $j^\mu = T^{\mu\nu}G_\mu$, with a corresponding charge given as 
+\begin{equation}
+    Q_G = \int d^3x j^0_G
+\end{equation}
+and the charges give a classical realization of the $\mathfrak{so}(4,2)$ algebra through Poisson brackets on phase space, thereby defining a representation of $\mathfrak{so}(4,2)$. 
+
+If we quantize our classical action and restrict to flat spacetime, the Poisson bracket becomes a commutator, the generators become operators on the Hilbert space, and the conformal symmetry is realized as projective unitary representations of $\mathfrak{so}(4,2)$ on quantum states. This is a larger symmetry group than Poincare with the algebra $\mathfrak{so}(3,1)$ giving a more tightly constrained quantum theory. An amazing consequence is the correlation functions of a conformal field theory are incredibly constrained, with 2 and 3 point functions being determined up to overall constants, and a two-dimensional conformal field theory is then constrained by an infinite-dimensional Lie algebra. The argument is that symmetries of the action must also be manifest in the correlation functions of the quantum theory. These are the \textbf{Ward Identities}.
+\begin{equation}
+    \delta_G
+    \left\langle
+    \mathcal{O}_1(x_1)\cdots \mathcal{O}_n(x_n)
+    \right\rangle
+    =
+    \sum_{i=1}^{n}
+    \left\langle
+    \mathcal{O}_1(x_1)\cdots
+    \delta_G \mathcal{O}_i(x_i)
+    \cdots \mathcal{O}_n(x_n)
+    \right\rangle
+    =0
+\end{equation}
+With $G$ being the generator of the given symmetry. For spacetime translations, let \(G = P_\mu\), a \textit{primary operator}\footnote{Local operators in a CFT form representations of the conformal algebra $\mathfrak{so}(d,2)$. Each representation is generated from a primary operator, which is the highest-weight state meaning that it is annihilated by the special conformal generators $K_\mu$. These are the primary operators and others made from them are \textit{descendants}. For more see \cite{difrancesco1997}} transforms as
+\begin{equation}
+    \delta_P \mathcal{O}_i(x_i)
+    =
+    -a^\mu \partial_\mu^{(i)} \mathcal{O}_i(x_i)
+\end{equation}
+Substituting this into the Ward identity gives the constraint on the correlation function imposed by the spacetime translation symmetry $P_\mu$:
+\begin{equation}
+    \sum_{i=1}^{n}
+    \partial_\mu^{(i)}
+    \left\langle
+    \mathcal{O}_1(x_1)\cdots \mathcal{O}_n(x_n)
+    \right\rangle
+    =0
+\end{equation}
+Thus the \(n\)-point correlation functions are invariant under overall spacetime translations, implying that the functions can only depend on their coordinate distance, giving constraint on the theory. 
+Each symmetry of the theory can be shown to have an associated Ward identity which is a differential equation the \(n\)-point functions must satisfy. Specifying to free electrodynamics in $d = 4$, going from Poincare symmetry to Conformal Symmetry, we went from 10 generators to 15, tightly constraining the system. Physically, it is the realization that free electrodynamics is more constrained, and this is reflected in the absence of any intrinsic length or mass scale in the  action. Electromagnetic fluctuations look the same at all distances, and there is no preferred energy scale in the dynamics. Looking at a two-dimensional CFT, the constraints imposed by the generators is now infinite-dimensional. Thus, the correlation functions are \textit{incredibly} constraining on the field theory. 
+
+\section{Conclusion}
+We have now seen, firsthand, the guiding power symmetry has in organizing the physical world. It is the physicist's torch while he explores the dark caves. Starting from the simple requirements that a map preserves angles, we have uncovered the rich structure of conformal symmetry. We classified all conformal transformations for three or more dimensions. We found it to be isomorphic to $SO(d,2)$. We also saw that in two dimensions, the CKE reduced to the Cauchy-Riemann Equations. This admitted a classical algebra (Witt) and its quantum extension (Virasoro), which classifies the spectrum of states. We found the general condition for a classical theory to have conformal symmetry was a traceless (improved) stress energy tensor. We showed it is manifest in free electrodynamics. Finally, we showed the effect of a symmetry on a quantum theory with the Ward identities. The effects of conformal symmetry in $d$ dimensions can be clearly seen as constraints on the correlation functions through these identities. \\\\
+With the above framework, conformal symmetry can be used to study 2nd or higher-order phase transitions. In string theory, two-dimensional conformal invariance appears naturally, and thus conformal field theories become important to understand. In $1+1$ dimensions they can be made mathematically rigorous. A two-dimensional conformal field theory is one of the few examples of an interacting quantum field theory that can often be solved exactly without perturbation theory. The infinite-dimensional conformal symmetry severely constrains the dynamics, allowing the spectrum and correlation functions to be determined from symmetry principles alone. This leads to methods that try to classify the theory and its dynamics from the correlation functions and local operators, which is Conformal Bootstrap. Additionally, we saw a powerful correspondence in $AdS_3/\text{CFT}$, realizing a CFT on the boundary to gravitational dynamics in the bulk. \\\\
+The class of mathematical structures and physical systems exhibiting conformal symmetry is remarkably broad, spanning from classical field theories to quantum critical phenomena, and continues to provide a unifying framework across diverse areas of theoretical physics. It must be then to understand the universe we think in terms of symmetries. 
+
+\newpage
+
+\bibliographystyle{unsrt}
+\bibliography{references}
+
+
+
+\end{document}
